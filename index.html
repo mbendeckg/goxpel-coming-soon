@@ -2,195 +2,257 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>GOXPEL Studios — Coming Soon</title>
 
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      color: white;
-      overflow: hidden;
-      background: black;
+    :root{
+      /* tweak these if you want */
+      --bg-brightness: 0.62;      /* overall brightness of background */
+      --bg-contrast: 1.05;        /* background contrast */
+      --center-lift: 0.18;        /* brighten center */
+      --vignette: 0.78;           /* darken edges */
+      --text-glow: 0.35;
     }
 
-    /* BACKGROUND BLURRED FILL */
-    .bg-blur {
+    * { box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: #000;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    /* === FULL PAGE BACKGROUND (THE LOGO IMAGE) === */
+    .bg {
       position: fixed;
       inset: 0;
-      background: url("assets/logo.jpg") center center / cover no-repeat;
-      filter: blur(50px) brightness(0.45);
-      transform: scale(1.25);
-      z-index: 1;
+      z-index: 0;
+
+      background-image: url("assets/logo.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;               /* THIS makes it true full screen */
+      background-position: center 42%;      /* keep logo area in view */
+      transform: scale(1.03);              /* tiny scale to avoid edge gaps */
+
+      filter: brightness(var(--bg-brightness)) contrast(var(--bg-contrast)) saturate(1.05);
     }
 
-    /* SOFT VIGNETTE (LESS HARSH SIDES) */
+    /* soft atmospheric haze (NOT milky) */
+    .atmos {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+
+      /* subtle warm glow center + very light fog */
+      background:
+        radial-gradient(ellipse at center, rgba(255,220,160,var(--center-lift)), rgba(0,0,0,0) 55%),
+        radial-gradient(ellipse at 50% 20%, rgba(255,235,200,0.08), rgba(0,0,0,0) 55%),
+        radial-gradient(ellipse at 50% 85%, rgba(0,0,0,0.35), rgba(0,0,0,0.65) 60%);
+      mix-blend-mode: screen;
+      opacity: 0.9;
+    }
+
+    /* controlled vignette so edges are cinematic but not crushed */
     .vignette {
       position: fixed;
       inset: 0;
-      background: radial-gradient(circle at center, rgba(0,0,0,0.15), rgba(0,0,0,0.85));
       z-index: 2;
       pointer-events: none;
+
+      background:
+        radial-gradient(ellipse at center,
+          rgba(0,0,0,0.08) 0%,
+          rgba(0,0,0,0.35) 55%,
+          rgba(0,0,0,var(--vignette)) 100%);
     }
 
-    /* MAIN LOGO IMAGE — SLIGHTLY ZOOMED, NO HARD BANDS */
-    .hero-image {
-      position: fixed;
-      inset: 0;
-      background: url("assets/logo.jpg") center center / 80% auto no-repeat;
-      z-index: 3;
-
-      /* Fade edges softly instead of dark bars */
-      mask-image: radial-gradient(circle at center, black 60%, transparent 100%);
-      -webkit-mask-image: radial-gradient(circle at center, black 60%, transparent 100%);
-    }
-
-    /* CENTER LIGHT BOOST (MAKES GOLD POP) */
-    .center-glow {
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(circle at center, rgba(255, 235, 190, 0.55), rgba(0,0,0,0.9));
-      z-index: 4;
-      pointer-events: none;
-    }
-
-    /* SUBTLE STARS */
+    /* subtle stars (very light) */
     .stars {
       position: fixed;
       inset: 0;
-      background-image:
-        radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,0.5), transparent),
-        radial-gradient(1px 1px at 70% 40%, rgba(255,255,255,0.4), transparent),
-        radial-gradient(1.5px 1.5px at 40% 70%, rgba(255,255,255,0.5), transparent),
-        radial-gradient(1px 1px at 80% 80%, rgba(255,255,255,0.3), transparent),
-        radial-gradient(2px 2px at 60% 20%, rgba(255,255,255,0.4), transparent);
-      background-size: 360px 360px;
-      opacity: 0.22;
-      z-index: 5;
+      z-index: 3;
       pointer-events: none;
+      opacity: 0.16;
+
+      background-image:
+        radial-gradient(1px 1px at 12% 28%, rgba(255,255,255,0.8), transparent 60%),
+        radial-gradient(1px 1px at 32% 18%, rgba(255,255,255,0.6), transparent 60%),
+        radial-gradient(1px 1px at 72% 26%, rgba(255,255,255,0.7), transparent 60%),
+        radial-gradient(1px 1px at 84% 44%, rgba(255,255,255,0.5), transparent 60%),
+        radial-gradient(1px 1px at 58% 52%, rgba(255,255,255,0.45), transparent 60%),
+        radial-gradient(1px 1px at 18% 66%, rgba(255,255,255,0.5), transparent 60%),
+        radial-gradient(1px 1px at 66% 78%, rgba(255,255,255,0.55), transparent 60%);
+      background-size: 520px 520px;
     }
 
-    /* ANIMATED CROSS LIGHT — CLEARER BUT STILL HOLY/SOFT */
-    .cross-light {
+    /* film grain (tiny, premium) */
+    .grain {
       position: fixed;
-      top: -35%;
-      left: 50%;
-      width: 260px;
-      height: 170%;
+      inset: 0;
+      z-index: 4;
+      pointer-events: none;
+      opacity: 0.07;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+    }
+
+    /* === CROSS LIGHT (SUBTLE ANIMATED) === */
+    .cross {
+      position: fixed;
+      inset: 0;
+      z-index: 5;
+      pointer-events: none;
+      opacity: 0.55;
+      animation: crossPulse 10s ease-in-out infinite;
+    }
+
+    /* vertical beam */
+    .cross::before{
+      content:"";
+      position:absolute;
+      left:50%;
+      top:-25%;
+      width: 220px;
+      height: 160%;
       transform: translateX(-50%);
       background: linear-gradient(
         to bottom,
-        rgba(255, 245, 210, 0.9),
-        rgba(255, 245, 210, 0.5),
-        rgba(255, 245, 210, 0.2),
-        rgba(0, 0, 0, 0)
+        rgba(255,245,210,0.85),
+        rgba(255,235,190,0.32),
+        rgba(255,235,190,0.10),
+        rgba(0,0,0,0)
       );
-      filter: blur(65px);
-      z-index: 6;
-      pointer-events: none;
-      animation: crossFloat 22s ease-in-out infinite;
+      filter: blur(60px);
       opacity: 0.9;
     }
 
-    @keyframes crossFloat {
-      0% {
-        transform: translateX(-50%) translateY(0);
-        opacity: 0.7;
-      }
-      50% {
-        transform: translateX(-50%) translateY(35px);
-        opacity: 1;
-      }
-      100% {
-        transform: translateX(-50%) translateY(0);
-        opacity: 0.7;
-      }
+    /* horizontal beam (smaller) */
+    .cross::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      top: 20%;
+      width: 70vw;
+      max-width: 1100px;
+      height: 180px;
+      transform: translateX(-50%);
+      background: radial-gradient(
+        ellipse at center,
+        rgba(255,245,210,0.55),
+        rgba(255,235,190,0.10) 55%,
+        rgba(0,0,0,0) 75%
+      );
+      filter: blur(50px);
+      opacity: 0.55;
     }
 
-    /* TEXT CONTENT */
-    .container {
+    @keyframes crossPulse{
+      0%   { opacity: 0.40; transform: translateY(0); }
+      50%  { opacity: 0.62; transform: translateY(10px); }
+      100% { opacity: 0.40; transform: translateY(0); }
+    }
+
+    /* === CONTENT === */
+    .content {
       position: relative;
-      z-index: 7;
+      z-index: 10;
       height: 100%;
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-end;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 72px 18px;
       text-align: center;
-      padding-bottom: 80px;
-      background: linear-gradient(to top, rgba(0,0,0,0.75), transparent 40%);
     }
 
-    .badge {
+    .stack{
+      width: min(880px, 92vw);
+      padding-bottom: 10px;
+    }
+
+    .badge{
+      display: inline-block;
       font-size: 12px;
       letter-spacing: 2px;
       text-transform: uppercase;
-      padding: 8px 18px;
-      border-radius: 30px;
-      background: rgba(255,255,255,0.08);
-      margin-bottom: 22px;
-      backdrop-filter: blur(6px);
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.14);
+      backdrop-filter: blur(8px);
+      margin-bottom: 18px;
     }
 
-    h1 {
-      font-size: 56px;
-      font-weight: 700;
+    h1{
       margin: 0;
+      font-size: clamp(34px, 5.2vw, 58px);
+      font-weight: 750;
       line-height: 1.1;
+      text-shadow: 0 18px 55px rgba(0,0,0,0.55);
     }
 
-    h1 span {
-      color: #e6c27a;
+    h1 .hope{
+      color: #e7c77f;
+      text-shadow: 0 0 26px rgba(231,199,127,var(--text-glow));
     }
 
-    .subtitle {
+    .line{
       margin-top: 14px;
-      font-size: 14px;
-      letter-spacing: 3px;
-      opacity: 0.9;
+      font-size: 12px;
+      letter-spacing: 3.5px;
+      opacity: 0.92;
+      text-transform: uppercase;
+      text-shadow: 0 12px 40px rgba(0,0,0,0.55);
     }
 
-    .description {
-      max-width: 520px;
-      margin-top: 22px;
+    .desc{
+      margin: 18px auto 0;
+      max-width: 560px;
       font-size: 14px;
-      line-height: 1.6;
-      opacity: 0.85;
+      line-height: 1.65;
+      opacity: 0.92;
+      text-shadow: 0 12px 40px rgba(0,0,0,0.6);
     }
 
+    /* mobile adjustments */
+    @media (max-width: 720px){
+      .content{ padding: 54px 16px; }
+      .cross::after{ top: 18%; }
+      .bg{ background-position: center 40%; }
+    }
   </style>
 </head>
-
 <body>
 
-  <!-- BACKGROUND LAYERS -->
-  <div class="bg-blur"></div>
+  <!-- FULL SCREEN LOGO BACKGROUND -->
+  <div class="bg"></div>
+
+  <!-- CINEMATIC LAYERS -->
+  <div class="atmos"></div>
   <div class="vignette"></div>
-  <div class="hero-image"></div>
-  <div class="center-glow"></div>
   <div class="stars"></div>
-  <div class="cross-light"></div>
+  <div class="grain"></div>
+  <div class="cross"></div>
 
   <!-- TEXT -->
-  <div class="container">
+  <main class="content">
+    <div class="stack">
+      <div class="badge">CHRISTIAN CONTENT COMPANY</div>
 
-    <div class="badge">CHRISTIAN CONTENT COMPANY</div>
+      <h1>Stories that point to <span class="hope">Hope</span>.</h1>
 
-    <h1>Stories that point to <span>Hope</span>.</h1>
+      <div class="line">SERIES • FILMS • EVENTS • CONCERTS • CONFERENCES</div>
 
-    <div class="subtitle">
-      SERIES • FILMS • EVENTS • CONCERTS • CONFERENCES
+      <div class="desc">
+        GOXPEL Studios is building cinematic, faith-forward stories and live experiences
+        that inspire, gather, and transform.<br><br>
+        Our platform is launching soon.
+      </div>
     </div>
-
-    <div class="description">
-      GOXPEL Studios is building cinematic, faith-forward stories and live experiences
-      that inspire, gather, and transform.
-      <br><br>
-      Our platform is launching soon.
-    </div>
-
-  </div>
+  </main>
 
 </body>
 </html>

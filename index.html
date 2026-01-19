@@ -20,33 +20,37 @@
       position: fixed;
       inset: 0;
       background: url("assets/logo.jpg") center center / cover no-repeat;
-      filter: blur(40px) brightness(0.5);
-      transform: scale(1.2);
+      filter: blur(50px) brightness(0.45);
+      transform: scale(1.25);
       z-index: 1;
     }
 
-    /* DARK CINEMATIC VIGNETTE */
+    /* SOFT VIGNETTE (LESS HARSH SIDES) */
     .vignette {
       position: fixed;
       inset: 0;
-      background: radial-gradient(circle at center, rgba(0,0,0,0.2), rgba(0,0,0,0.9));
+      background: radial-gradient(circle at center, rgba(0,0,0,0.15), rgba(0,0,0,0.85));
       z-index: 2;
       pointer-events: none;
     }
 
-    /* CENTER LOGO IMAGE — FULLY VISIBLE */
+    /* MAIN LOGO IMAGE — SLIGHTLY ZOOMED, NO HARD BANDS */
     .hero-image {
       position: fixed;
       inset: 0;
-      background: url("assets/logo.jpg") center center / contain no-repeat;
+      background: url("assets/logo.jpg") center center / 80% auto no-repeat;
       z-index: 3;
+
+      /* Fade edges softly instead of dark bars */
+      mask-image: radial-gradient(circle at center, black 60%, transparent 100%);
+      -webkit-mask-image: radial-gradient(circle at center, black 60%, transparent 100%);
     }
 
-    /* CENTER LIGHT BOOST */
+    /* CENTER LIGHT BOOST (MAKES GOLD POP) */
     .center-glow {
       position: fixed;
       inset: 0;
-      background: radial-gradient(circle at center, rgba(255, 225, 170, 0.45), rgba(0,0,0,0.85));
+      background: radial-gradient(circle at center, rgba(255, 235, 190, 0.55), rgba(0,0,0,0.9));
       z-index: 4;
       pointer-events: none;
     }
@@ -62,30 +66,30 @@
         radial-gradient(1px 1px at 80% 80%, rgba(255,255,255,0.3), transparent),
         radial-gradient(2px 2px at 60% 20%, rgba(255,255,255,0.4), transparent);
       background-size: 360px 360px;
-      opacity: 0.25;
+      opacity: 0.22;
       z-index: 5;
       pointer-events: none;
     }
 
-    /* ANIMATED CROSS LIGHT */
+    /* ANIMATED CROSS LIGHT — CLEARER BUT STILL HOLY/SOFT */
     .cross-light {
       position: fixed;
-      top: -40%;
+      top: -35%;
       left: 50%;
-      width: 300px;
+      width: 260px;
       height: 170%;
       transform: translateX(-50%);
       background: linear-gradient(
         to bottom,
-        rgba(255, 245, 210, 0.85),
-        rgba(255, 245, 210, 0.45),
-        rgba(255, 245, 210, 0.15),
+        rgba(255, 245, 210, 0.9),
+        rgba(255, 245, 210, 0.5),
+        rgba(255, 245, 210, 0.2),
         rgba(0, 0, 0, 0)
       );
-      filter: blur(70px);
+      filter: blur(65px);
       z-index: 6;
       pointer-events: none;
-      animation: crossFloat 18s ease-in-out infinite;
+      animation: crossFloat 22s ease-in-out infinite;
       opacity: 0.9;
     }
 
@@ -95,7 +99,7 @@
         opacity: 0.7;
       }
       50% {
-        transform: translateX(-50%) translateY(25px);
+        transform: translateX(-50%) translateY(35px);
         opacity: 1;
       }
       100% {

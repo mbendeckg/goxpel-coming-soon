@@ -1,293 +1,191 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="GOXPEL Studios — Christian stories, series, events, concerts, and conferences. Coming soon." />
-  <meta name="theme-color" content="#0b0b12" />
-
+  <meta charset="UTF-8" />
   <title>GOXPEL Studios — Coming Soon</title>
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="GOXPEL Studios — Coming Soon" />
-  <meta property="og:description" content="Christian stories, series, events, concerts, and conferences. Coming soon." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="assets/logo.jpg" />
-
   <style>
-    :root{
-      --bg:#06060c;
-      --text:#f4f2ff;
-      --muted:rgba(244,242,255,.72);
-      --muted2:rgba(244,242,255,.55);
-      --glass:rgba(255,255,255,.06);
-      --border:rgba(255,255,255,.14);
-      --accent:#f6c15c;
-      --accent2:#ffecb3;
-      --shadow: 0 30px 90px rgba(0,0,0,.65);
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: white;
+      overflow: hidden;
+      background: radial-gradient(circle at top, #1a1208 0%, #050505 60%, #000 100%);
     }
 
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
-    body{
-      margin:0;
-      color:var(--text);
-      background: var(--bg);
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      overflow-x:hidden;
+    /* STAR FIELD */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 70% 40%, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1.5px 1.5px at 40% 70%, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 80% 80%, rgba(255,255,255,0.5), transparent),
+        radial-gradient(2px 2px at 60% 20%, rgba(255,255,255,0.6), transparent);
+      background-size: 300px 300px;
+      opacity: 0.4;
+      z-index: 0;
     }
 
-    /* Background layers */
-    .bg{
-      position:fixed;
-      inset:0;
-      z-index:-1;
-      overflow:hidden;
-      background:
-        radial-gradient(1200px 700px at 50% 20%, rgba(246,193,92,.12), transparent 60%),
-        radial-gradient(900px 600px at 30% 70%, rgba(110,180,255,.10), transparent 60%),
-        var(--bg);
+    /* WARM CENTER GLOW */
+    .warm-glow {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(255, 200, 120, 0.28), rgba(0,0,0,0.85));
+      z-index: 1;
+      pointer-events: none;
     }
 
-    canvas{
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
+    /* SUBTLE CROSS LIGHT BEAM */
+    .cross-light {
+      position: fixed;
+      top: -20%;
+      left: 50%;
+      width: 220px;
+      height: 140%;
+      transform: translateX(-50%);
+      background: linear-gradient(
+        to bottom,
+        rgba(255, 230, 170, 0.35),
+        rgba(255, 230, 170, 0.12),
+        rgba(255, 230, 170, 0.04),
+        rgba(0, 0, 0, 0)
+      );
+      filter: blur(40px);
+      z-index: 2;
+      pointer-events: none;
     }
 
-    .overlay{
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(closest-side at 50% 25%, rgba(0,0,0,0) 30%, rgba(0,0,0,.75) 100%),
-        linear-gradient(to bottom, rgba(0,0,0,.2), rgba(0,0,0,.75));
-      pointer-events:none;
+    /* MAIN CONTAINER */
+    .container {
+      position: relative;
+      z-index: 3;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 20px;
     }
 
-    .glow{
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(700px 500px at 50% 18%, rgba(246,193,92,.18), transparent 65%);
-      pointer-events:none;
-      filter: blur(1px);
+    /* LOGO CARD */
+    .logo-card {
+      width: 300px;
+      height: 520px;
+      border-radius: 22px;
+      background: rgba(0,0,0,0.35);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 215, 140, 0.25);
+      box-shadow:
+        0 0 60px rgba(255, 200, 120, 0.35),
+        0 0 120px rgba(255, 200, 120, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 30px;
+      position: relative;
     }
 
-    /* Layout */
-    .wrap{
-      min-height:100%;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      gap:30px;
-      padding: 40px 18px 30px;
-      max-width: 1000px;
-      margin: 0 auto;
-      text-align:center;
+    .logo-card img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 16px;
     }
 
-    .logo{
-      width:min(460px, 80vw);
-      border-radius: 18px;
-      box-shadow: var(--shadow);
-      border: 1px solid rgba(255,255,255,.12);
-    }
-
-    .badge{
-      display:inline-block;
-      padding: 8px 16px;
+    /* BADGE */
+    .badge {
+      font-size: 12px;
+      letter-spacing: 2px;
+      padding: 8px 18px;
       border-radius: 999px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.10);
-      color: var(--muted);
-      font-size: 13px;
-      letter-spacing: .22em;
+      background: rgba(255,255,255,0.08);
+      margin-bottom: 30px;
       text-transform: uppercase;
-      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 215, 140, 0.25);
     }
 
-    h1{
-      margin: 18px 0 10px;
-      font-size: clamp(34px, 5vw, 62px);
-      line-height: 1.05;
-      letter-spacing: -0.02em;
-      text-shadow: 0 10px 40px rgba(0,0,0,.6);
+    /* TITLE */
+    h1 {
+      font-size: 48px;
+      font-weight: 700;
+      margin: 0 0 12px 0;
     }
 
-    .accent{
-      color: var(--accent2);
-      text-shadow: 0 0 28px rgba(246,193,92,.35);
+    h1 span {
+      color: #e8c27a;
     }
 
-    .subtitle{
-      color: var(--muted);
-      letter-spacing:.12em;
-      text-transform: uppercase;
-      margin-bottom: 10px;
+    /* SUBTITLE */
+    .subtitle {
+      font-size: 14px;
+      letter-spacing: 3px;
+      opacity: 0.85;
+      margin-bottom: 20px;
     }
 
-    .blurb{
-      max-width: 60ch;
-      color: var(--muted2);
-      line-height: 1.7;
-      font-size: 16px;
-      margin: 0 auto;
+    /* DESCRIPTION */
+    .description {
+      max-width: 520px;
+      font-size: 15px;
+      opacity: 0.75;
+      line-height: 1.6;
+      margin-bottom: 20px;
     }
 
-    .cta{
-      display:flex;
-      gap:14px;
-      justify-content:center;
-      flex-wrap:wrap;
-      margin-top: 18px;
+    .coming {
+      opacity: 0.6;
+      font-size: 14px;
     }
 
-    .btn{
-      border-radius: 14px;
-      padding: 12px 18px;
-      border: 1px solid rgba(255,255,255,.16);
-      background: rgba(255,255,255,.06);
-      color: var(--text);
-      text-decoration:none;
-      font-weight: 650;
-      transition: transform .18s ease, background .18s ease;
-      backdrop-filter: blur(10px);
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 34px;
+      }
+      .logo-card {
+        width: 240px;
+        height: 420px;
+      }
     }
-
-    .btn:hover{
-      transform: translateY(-1px);
-      background: rgba(255,255,255,.12);
-    }
-
-    .btn.primary{
-      background: linear-gradient(135deg, rgba(246,193,92,.95), rgba(255,232,160,.9));
-      color:#1b1306;
-      box-shadow: 0 20px 60px rgba(246,193,92,.25);
-    }
-
-    footer{
-      margin-top: 40px;
-      color: rgba(244,242,255,.55);
-      font-size: 13px;
-    }
-
   </style>
 </head>
 
 <body>
-  <!-- Cinematic animated background -->
-  <div class="bg">
-    <canvas id="stars"></canvas>
-    <canvas id="embers"></canvas>
-    <div class="overlay"></div>
-    <div class="glow"></div>
-  </div>
 
-  <main class="wrap">
-    <img src="assets/logo.jpg" alt="GOXPEL Studios" class="logo" />
+  <!-- Glow Layers -->
+  <div class="warm-glow"></div>
+  <div class="cross-light"></div>
+
+  <!-- Content -->
+  <div class="container">
+
+    <div class="logo-card">
+      <!-- IMPORTANT: your logo file must be here -->
+      <img src="assets/logo.jpg" alt="GOXPEL Studios Logo">
+    </div>
 
     <div class="badge">Christian Content Company</div>
 
-    <h1>Stories that point to <span class="accent">Hope</span>.</h1>
+    <h1>Stories that point to <span>Hope</span>.</h1>
 
-    <div class="subtitle">Series • Films • Events • Concerts • Conferences</div>
-
-    <p class="blurb">
-      GOXPEL Studios is building cinematic, faith-forward stories and live experiences
-      that inspire, gather, and transform.
-      <br><br>
-      Our platform is launching soon.
-    </p>
-
-    <div class="cta">
-      <a class="btn primary" href="mailto:hello@goxpel.com">Contact Us</a>
-      <a class="btn" href="#">Launching Soon</a>
+    <div class="subtitle">
+      SERIES • FILMS • EVENTS • CONCERTS • CONFERENCES
     </div>
 
-    <footer>
-      © <span id="year"></span> GOXPEL Studios — Built with purpose.
-    </footer>
-  </main>
+    <div class="description">
+      GOXPEL Studios is building cinematic, faith-forward stories and live experiences
+      that inspire, gather, and transform.
+    </div>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+    <div class="coming">
+      Our platform is launching soon.
+    </div>
 
-    function setupCanvas(canvas) {
-      const ctx = canvas.getContext("2d");
-      function resize() {
-        const dpr = Math.min(2, window.devicePixelRatio || 1);
-        canvas.width = window.innerWidth * dpr;
-        canvas.height = window.innerHeight * dpr;
-        canvas.style.width = "100%";
-        canvas.style.height = "100%";
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      }
-      resize();
-      window.addEventListener("resize", resize);
-      return ctx;
-    }
+  </div>
 
-    /* Star field */
-    const starCtx = setupCanvas(document.getElementById("stars"));
-    const stars = Array.from({ length: 180 }, () => ({
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight,
-      r: Math.random() * 1.5 + 0.3,
-      a: Math.random()
-    }));
-
-    function drawStars() {
-      starCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-      for (const s of stars) {
-        s.a += (Math.random() - 0.5) * 0.01;
-        s.a = Math.max(0.2, Math.min(1, s.a));
-        starCtx.beginPath();
-        starCtx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-        starCtx.fillStyle = `rgba(255,255,255,${s.a})`;
-        starCtx.fill();
-      }
-      requestAnimationFrame(drawStars);
-    }
-    drawStars();
-
-    /* Ember particles */
-    const emberCtx = setupCanvas(document.getElementById("embers"));
-    const embers = [];
-
-    function spawnEmber() {
-      embers.push({
-        x: Math.random() * window.innerWidth,
-        y: window.innerHeight + 20,
-        vy: -(Math.random() * 0.6 + 0.3),
-        size: Math.random() * 2 + 0.6,
-        a: Math.random() * 0.5 + 0.3
-      });
-    }
-
-    for (let i = 0; i < 60; i++) spawnEmber();
-
-    function drawEmbers() {
-      emberCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-      for (const e of embers) {
-        e.y += e.vy;
-        emberCtx.beginPath();
-        emberCtx.arc(e.x, e.y, e.size, 0, Math.PI * 2);
-        emberCtx.fillStyle = `rgba(246,193,92,${e.a})`;
-        emberCtx.fill();
-      }
-
-      for (let i = embers.length - 1; i >= 0; i--) {
-        if (embers[i].y < -50) {
-          embers.splice(i, 1);
-          spawnEmber();
-        }
-      }
-
-      requestAnimationFrame(drawEmbers);
-    }
-    drawEmbers();
-  </script>
 </body>
 </html>

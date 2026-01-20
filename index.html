@@ -18,22 +18,18 @@
       background: #000;
       overflow: hidden;
     }
-    .bg-container {
-      position: fixed;
-      inset: 0;
-      z-index: 1;
-    }
+    .bg-container { position: fixed; inset: 0; z-index: 1; }
     .background {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center;
-      filter: brightness(0.85) contrast(1.1) saturate(1.25); /* Warm golden-hour enhancement */
+      filter: brightness(0.92) contrast(1.08) saturate(1.35) hue-rotate(5deg); /* Warm golden enhancement */
     }
     .overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.65) 50%, rgba(0,0,0,0.88) 100%);
+      background: linear-gradient(to bottom, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.58) 45%, rgba(0,0,0,0.85) 100%);
       z-index: 2;
     }
     .content {
@@ -53,11 +49,11 @@
       font-size: clamp(7rem, 18vw, 20rem);
       font-weight: 900;
       letter-spacing: -0.07em;
-      background: linear-gradient(90deg, #ffdb4d 15%, #fff176 50%, #ffdb4d 85%);
+      background: linear-gradient(90deg, #ffdb4d 15%, #fff59d 50%, #ffdb4d 85%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      text-shadow: 0 0 50px rgba(255,219,77,0.45), 0 12px 35px rgba(0,0,0,0.7);
+      text-shadow: 0 0 45px rgba(255,219,77,0.5), 0 10px 30px rgba(0,0,0,0.65);
       line-height: 0.82;
     }
     .studios {
@@ -65,7 +61,7 @@
       font-weight: 900;
       letter-spacing: 0.28em;
       color: #ffe082;
-      text-shadow: 0 5px 25px rgba(255,224,130,0.4);
+      text-shadow: 0 4px 20px rgba(255,224,130,0.45);
       margin-top: -3rem;
     }
     .tagline {
@@ -110,16 +106,16 @@
 <body>
 
   <div class="bg-container">
-    <!-- Default: Majestic golden sunrise over misty peaks & cloud sea – warm hope vibe -->
+    <!-- Recommended golden sunrise – warm, majestic, high-end cinematic feel -->
     <img class="background" 
-         src="https://thumbs.dreamstime.com/b/golden-dawn-majestic-cloud-sea-sunrise-over-towering-peaks-breathtaking-image-captures-panoramic-vast-clouds-nestled-421591717.jpg" 
-         alt="Majestic golden sunrise over misty mountain peaks cinematic">
+         src="https://thumbs.dreamstime.com/b/magical-sunrise-over-misty-mountain-valley-breathtaking-golden-hour-landscape-photography-light-paints-364481707.jpg" 
+         alt="Magical golden sunrise over misty mountain valley cinematic">
 
-    <!-- Alternative: Divine rays on holy mountain peaks -->
-    <!-- <img class="background" src="https://thumbs.dreamstime.com/b/witness-breathtaking-sunrise-painting-majestic-mountain-peaks-golden-rays-divine-light-serene-picturesque-360428825.jpg" alt="Divine golden rays over mountains"> -->
+    <!-- Alternative: Divine rays on peaks (even more inspirational) -->
+    <!-- <img class="background" src="https://thumbs.dreamstime.com/b/witness-breathtaking-sunrise-painting-majestic-mountain-peaks-golden-rays-divine-light-serene-picturesque-360428825.jpg" alt="Divine golden rays sunrise mountains"> -->
 
-    <!-- Alternative: Golden sunrise over misty valley & river -->
-    <!-- <img class="background" src="https://thumbs.dreamstime.com/b/ai-generated-golden-sunrise-over-misty-mountain-valley-winding-river-landscape-showing-illuminating-vast-layers-mist-423304184.jpg" alt="Golden sunrise misty valley river"> -->
+    <!-- Alternative: Panoramic misty peaks sunrise -->
+    <!-- <img class="background" src="https://thumbs.dreamstime.com/b/breathtaking-panoramic-view-majestic-mountain-landscape-bathed-warm-golden-glow-sunrise-sunset-layers-peaks-rise-417598033.jpg" alt="Panoramic golden sunrise misty mountains"> -->
 
     <div class="overlay"></div>
   </div>

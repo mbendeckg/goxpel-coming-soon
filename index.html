@@ -237,21 +237,21 @@
     }
 
     .meteorIcon {
-      width: 80px;
-      height: 80px;
-      margin-bottom: 10px;
-      filter: drop-shadow(0 0 20px rgba(255, 200, 100, 0.6));
-      animation: meteorPulse 3s ease-in-out infinite;
+      width: 90px;
+      height: 90px;
+      margin-bottom: 12px;
+      filter: drop-shadow(0 0 25px rgba(255, 150, 50, 0.7));
+      animation: flamePulse 3s ease-in-out infinite;
     }
 
-    @keyframes meteorPulse {
+    @keyframes flamePulse {
       0%, 100% { 
-        filter: drop-shadow(0 0 20px rgba(255, 200, 100, 0.5));
+        filter: drop-shadow(0 0 25px rgba(255, 150, 50, 0.6));
         transform: translateY(0);
       }
       50% { 
-        filter: drop-shadow(0 0 35px rgba(255, 200, 100, 0.8));
-        transform: translateY(3px);
+        filter: drop-shadow(0 0 45px rgba(255, 120, 30, 0.9));
+        transform: translateY(-4px);
       }
     }
 
@@ -473,8 +473,8 @@
       }
       
       .meteorIcon {
-        width: 65px;
-        height: 65px;
+        width: 75px;
+        height: 75px;
       }
       
       h1 {
@@ -503,8 +503,8 @@
       }
       
       .meteorIcon {
-        width: 55px;
-        height: 55px;
+        width: 65px;
+        height: 65px;
       }
       
       .logoSubtext {
@@ -550,33 +550,78 @@
   <!-- Logo at top - Beautiful text-based design -->
   <div class="logoContainer">
     <div class="logoMark">
-      <!-- Meteor Icon SVG -->
-      <svg class="meteorIcon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Main meteors -->
-        <path d="M45 15 L48 35 L40 32 Z" fill="url(#meteor1)" />
-        <path d="M52 18 L55 38 L47 35 Z" fill="url(#meteor2)" />
-        <path d="M59 22 L62 42 L54 39 Z" fill="url(#meteor3)" />
+      <!-- Holy Spirit Fire Icon - Three Flames Descending -->
+      <svg class="meteorIcon" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Left Flame -->
+        <path d="M30 25 C30 25, 25 35, 27 50 C29 65, 32 75, 35 80 C38 75, 41 65, 39 50 C37 35, 32 25, 30 25 Z" 
+              fill="url(#flame1)" />
+        <path d="M30 25 C30 25, 28 32, 29 42 C30 52, 32 60, 33 63 C34 60, 36 52, 35 42 C34 32, 32 25, 30 25 Z" 
+              fill="url(#flameInner1)" opacity="0.9" />
         
-        <!-- Glow effects -->
-        <ellipse cx="50" cy="28" rx="15" ry="12" fill="url(#glow)" opacity="0.6" />
+        <!-- Center Flame (Larger) -->
+        <path d="M60 15 C60 15, 53 28, 55 48 C57 68, 62 82, 66 88 C70 82, 75 68, 73 48 C71 28, 64 15, 60 15 Z" 
+              fill="url(#flame2)" />
+        <path d="M60 15 C60 15, 57 25, 58 40 C59 55, 62 68, 64 72 C66 68, 69 55, 68 40 C67 25, 63 15, 60 15 Z" 
+              fill="url(#flameInner2)" opacity="0.9" />
+        
+        <!-- Right Flame -->
+        <path d="M90 25 C90 25, 85 35, 87 50 C89 65, 92 75, 95 80 C98 75, 101 65, 99 50 C97 35, 92 25, 90 25 Z" 
+              fill="url(#flame3)" />
+        <path d="M90 25 C90 25, 88 32, 89 42 C90 52, 92 60, 93 63 C94 60, 96 52, 95 42 C94 32, 92 25, 90 25 Z" 
+              fill="url(#flameInner3)" opacity="0.9" />
+        
+        <!-- Glow effects at base -->
+        <ellipse cx="32" cy="78" rx="8" ry="6" fill="url(#glowBase)" opacity="0.7" />
+        <ellipse cx="66" cy="86" rx="10" ry="7" fill="url(#glowBase)" opacity="0.8" />
+        <ellipse cx="95" cy="78" rx="8" ry="6" fill="url(#glowBase)" opacity="0.7" />
         
         <!-- Gradient definitions -->
         <defs>
-          <linearGradient id="meteor1" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" style="stop-color:#ffdb99;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#ff9933;stop-opacity:1" />
+          <!-- Flame gradients - warm orange to bright yellow -->
+          <linearGradient id="flame1" x1="50%" y1="0%" x2="50%" y2="100%">
+            <stop offset="0%" style="stop-color:#fff9e6;stop-opacity:1" />
+            <stop offset="30%" style="stop-color:#ffe4b3;stop-opacity:1" />
+            <stop offset="70%" style="stop-color:#ffaa44;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#ff6622;stop-opacity:1" />
           </linearGradient>
-          <linearGradient id="meteor2" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" style="stop-color:#ffe4b3;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#ffaa44;stop-opacity:1" />
+          
+          <linearGradient id="flame2" x1="50%" y1="0%" x2="50%" y2="100%">
+            <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+            <stop offset="25%" style="stop-color:#fff4d9;stop-opacity:1" />
+            <stop offset="60%" style="stop-color:#ffbb55;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#ff7733;stop-opacity:1" />
           </linearGradient>
-          <linearGradient id="meteor3" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" style="stop-color:#ffd699;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#ff8822;stop-opacity:1" />
+          
+          <linearGradient id="flame3" x1="50%" y1="0%" x2="50%" y2="100%">
+            <stop offset="0%" style="stop-color:#fff9e6;stop-opacity:1" />
+            <stop offset="30%" style="stop-color:#ffe4b3;stop-opacity:1" />
+            <stop offset="70%" style="stop-color:#ffaa44;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#ff6622;stop-opacity:1" />
           </linearGradient>
-          <radialGradient id="glow">
-            <stop offset="0%" style="stop-color:#ffe4b3;stop-opacity:0.8" />
-            <stop offset="100%" style="stop-color:#ff9933;stop-opacity:0" />
+          
+          <!-- Inner flame highlights - brighter -->
+          <linearGradient id="flameInner1" x1="50%" y1="0%" x2="50%" y2="100%">
+            <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#fff4d9;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#ffcc77;stop-opacity:0.8" />
+          </linearGradient>
+          
+          <linearGradient id="flameInner2" x1="50%" y1="0%" x2="50%" y2="100%">
+            <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#ffffe6;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#ffd699;stop-opacity:0.9" />
+          </linearGradient>
+          
+          <linearGradient id="flameInner3" x1="50%" y1="0%" x2="50%" y2="100%">
+            <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#fff4d9;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#ffcc77;stop-opacity:0.8" />
+          </linearGradient>
+          
+          <!-- Glow at base -->
+          <radialGradient id="glowBase">
+            <stop offset="0%" style="stop-color:#ffdd88;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#ff8833;stop-opacity:0" />
           </radialGradient>
         </defs>
       </svg>

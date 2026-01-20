@@ -210,7 +210,7 @@
       }
     }
 
-    /* LOGO CONTAINER - positioned at top/center with elegant blending */
+    /* LOGO CONTAINER - elegant text-based logo */
     .logoContainer {
       position: fixed;
       top: 0;
@@ -218,8 +218,9 @@
       transform: translateX(-50%);
       z-index: 15;
       width: 100%;
-      max-width: 420px;
-      padding: 50px 20px 0;
+      max-width: 600px;
+      padding: 60px 20px 0;
+      text-align: center;
       animation: logoFadeIn 2.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
       opacity: 0;
     }
@@ -228,27 +229,70 @@
       to { opacity: 1; }
     }
 
-    .logoContainer img {
-      width: 100%;
-      height: auto;
-      opacity: 0.85;
-      filter: 
-        drop-shadow(0 25px 70px rgba(0, 0, 0, 0.9))
-        drop-shadow(0 10px 30px rgba(0, 0, 0, 0.7))
-        brightness(0.95)
-        contrast(1.05);
-      mix-blend-mode: screen;
-      transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    .logoMark {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
     }
 
-    .logoContainer img:hover {
-      opacity: 1;
-      filter: 
-        drop-shadow(0 25px 70px rgba(0, 0, 0, 0.9))
-        drop-shadow(0 10px 30px rgba(0, 0, 0, 0.7))
-        brightness(1.05)
-        contrast(1.08);
-      transform: translateY(-3px);
+    .meteorIcon {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 10px;
+      filter: drop-shadow(0 0 20px rgba(255, 200, 100, 0.6));
+      animation: meteorPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes meteorPulse {
+      0%, 100% { 
+        filter: drop-shadow(0 0 20px rgba(255, 200, 100, 0.5));
+        transform: translateY(0);
+      }
+      50% { 
+        filter: drop-shadow(0 0 35px rgba(255, 200, 100, 0.8));
+        transform: translateY(3px);
+      }
+    }
+
+    .logoText {
+      font-size: clamp(52px, 8vw, 72px);
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      background: linear-gradient(
+        135deg,
+        #f4d799 0%,
+        #e7c77f 25%,
+        #f8e5b8 50%,
+        #e7c77f 75%,
+        #f4d799 100%
+      );
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 
+        0 0 40px rgba(231, 199, 127, 0.4),
+        0 20px 50px rgba(0, 0, 0, 0.8);
+      animation: goldShimmer 6s ease-in-out infinite;
+      position: relative;
+    }
+
+    @keyframes goldShimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .logoSubtext {
+      font-size: clamp(11px, 2vw, 14px);
+      font-weight: 600;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(244, 215, 153, 0.9);
+      text-shadow: 
+        0 0 20px rgba(231, 199, 127, 0.3),
+        0 10px 30px rgba(0, 0, 0, 0.8);
+      margin-top: 4px;
     }
 
     /* CONTENT CONTAINER */
@@ -420,8 +464,17 @@
       .stack { width: 96vw; }
       
       .logoContainer {
-        max-width: 340px;
-        padding: 35px 20px 0;
+        max-width: 500px;
+        padding: 45px 20px 0;
+      }
+      
+      .logoText {
+        font-size: clamp(44px, 10vw, 60px);
+      }
+      
+      .meteorIcon {
+        width: 65px;
+        height: 65px;
       }
       
       h1 {
@@ -441,8 +494,22 @@
 
     @media (max-width: 480px) {
       .logoContainer {
-        max-width: 280px;
-        padding: 25px 15px 0;
+        max-width: 420px;
+        padding: 35px 15px 0;
+      }
+      
+      .logoText {
+        font-size: clamp(38px, 12vw, 50px);
+      }
+      
+      .meteorIcon {
+        width: 55px;
+        height: 55px;
+      }
+      
+      .logoSubtext {
+        font-size: 9px;
+        letter-spacing: 0.30em;
       }
       
       .badge {
@@ -480,10 +547,46 @@
   <div class="grain"></div>
   <div class="cross"></div>
 
-  <!-- Logo at top -->
+  <!-- Logo at top - Beautiful text-based design -->
   <div class="logoContainer">
-    <!-- Your Goxpel Studios logo -->
-    <img src="assets/logo.jpg" alt="Goxpel Studios" />
+    <div class="logoMark">
+      <!-- Meteor Icon SVG -->
+      <svg class="meteorIcon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Main meteors -->
+        <path d="M45 15 L48 35 L40 32 Z" fill="url(#meteor1)" />
+        <path d="M52 18 L55 38 L47 35 Z" fill="url(#meteor2)" />
+        <path d="M59 22 L62 42 L54 39 Z" fill="url(#meteor3)" />
+        
+        <!-- Glow effects -->
+        <ellipse cx="50" cy="28" rx="15" ry="12" fill="url(#glow)" opacity="0.6" />
+        
+        <!-- Gradient definitions -->
+        <defs>
+          <linearGradient id="meteor1" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#ffdb99;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#ff9933;stop-opacity:1" />
+          </linearGradient>
+          <linearGradient id="meteor2" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#ffe4b3;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#ffaa44;stop-opacity:1" />
+          </linearGradient>
+          <linearGradient id="meteor3" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#ffd699;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#ff8822;stop-opacity:1" />
+          </linearGradient>
+          <radialGradient id="glow">
+            <stop offset="0%" style="stop-color:#ffe4b3;stop-opacity:0.8" />
+            <stop offset="100%" style="stop-color:#ff9933;stop-opacity:0" />
+          </radialGradient>
+        </defs>
+      </svg>
+      
+      <!-- Main logo text -->
+      <div class="logoText">GOXPEL</div>
+      
+      <!-- Subtext -->
+      <div class="logoSubtext">STUDIOS</div>
+    </div>
   </div>
 
   <!-- Content -->
